@@ -1,0 +1,100 @@
+<div>
+  <div class="card">
+    <div class="card-header bg-success">
+      New Employee
+    </div>
+    <div class="card-body">
+      <form [formGroup]="applicantForm">
+        <div class="row">
+          <div class="col-6">
+            <label for="firstName">First Name</label>
+            <input type="text" formControlName="firstName" class="form-control">
+            <div class="text-danger">
+              @if (applicantForm.controls['firstName'].touched) {
+              @if (applicantForm.controls['firstName'].errors?.['required']) {
+                <span> First Name is Required!! </span>
+              }
+              }
+            </div>
+          </div>
+          <div class="col-6">
+            <label for="lastName">Last Name</label>
+            <input type="text" formControlName="lastName" class="form-control">
+            <div class="text-danger">
+              @if (applicantForm.controls['lastName'].touched) {
+              @if (applicantForm.controls['lastName'].errors?.['required']) {
+              <span> Last Name is Required!! </span>
+              }
+              }
+            </div>
+          </div>
+          <div class="col-6">
+            <label for="email">Email-ID</label>
+            <input type="text" formControlName="emailId" class="form-control">
+            <div class="text-danger">
+              @if (applicantForm.controls['emailId'].touched) {
+              @if (applicantForm.controls['emailId'].errors?.['required']) {
+              <span> Email-ID is Required!! </span>
+              }
+              }
+            </div>
+          </div>
+          <div class="col-6">
+            <label for="phoneNumber">Phone Number</label>
+            <input type="text" formControlName="phoneNumber" class="form-control">
+            <div class="text-danger">
+              @if (applicantForm.controls['phoneNumber'].touched) {
+              @if (applicantForm.controls['phoneNumber'].errors?.['required']) {
+              <span> Phone Number is Required!! </span>
+              }
+              @if (applicantForm.controls['phoneNumber'].errors?.['minlength']) {
+              <span> Phone number should be of 10 digits </span>
+              }
+              }
+            </div>
+          </div>
+          <div class="col-12">
+            <label for="address">Address</label>
+            <textarea type="text" formControlName="address" class="form-control"></textarea>
+          </div>
+          <div class="col-6">
+            <label for="pinCode">Pin Code</label>
+            <input type="text" formControlName="pinCode" class="form-control">
+          </div>
+          <div class="col-6">
+            <label for="city">City</label>
+            <input type="text" formControlName="city" class="form-control">
+          </div>
+          <div class="col-6">
+            <label for="state">State</label>
+            <input type="text" formControlName="state" class="form-control">
+          </div>
+          <div class="col-6">
+            <label for="country">Country</label>
+            <input type="text" formControlName="country" class="form-control">
+          </div>
+          <div class="col-6">
+            <label for="adharNo">Aadhar No.</label>
+            <input type="text" formControlName="adharNo" class="form-control">
+          </div>
+          <div class="col-6">
+            <label for="panCard">Pan Card</label>
+            <input type="text" formControlName="panCard" class="form-control">
+          </div>
+          <div class="col-6">
+            <label for="employmentStatus">Employee Status</label>
+            <input type="text" formControlName="employmentStatus" class="form-control">
+          </div>
+        </div>
+        <div class="row pt-2">
+          <div class="col-6 text-center">
+            <button class="btn btn-secondary" type="button" (click)="reset()" >Reset</button>
+          </div>
+          <div class="col-6 text-center">
+            <button class="btn btn-success" type="button" [disabled]="applicantForm.invalid" (click)="onSave()">+ Add Applicant</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

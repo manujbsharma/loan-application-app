@@ -1,24 +1,16 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
-// import { PopuponeditComponent } from './popuponedit/popuponedit.component';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-// import { RouterOutlet } from '@angular/router';
-import { applicantModel } from './Model/applicant';
-import { MatDialog, MatDialogConfig, MatDialogModule } from '@angular/material/dialog';
-import { PopuponeditComponent } from './popuponedit/popuponedit.component';
+import { MatDialog } from '@angular/material/dialog';
+import { applicantModel } from '../Model/applicant';
+
 
 @Component({
-  selector: 'app-root',
-  imports: [
-    // RouterOutlet, 
-    ReactiveFormsModule,
-    MatDialogModule,
-    // PopuponeditComponent
-  ],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  selector: 'app-popuponedit',
+  imports: [ReactiveFormsModule],
+  templateUrl: './popuponedit.component.html',
+  styleUrl: './popuponedit.component.css'
 })
-
-export class AppComponent {
+export class PopuponeditComponent {
 
   applicantForm: FormGroup = new FormGroup({});
 
@@ -38,11 +30,11 @@ export class AppComponent {
   }
 
   createForm() {
-    debugger
+
     this.applicantForm = new FormGroup({
       applicantid: new FormControl(this.applicantObj.applicantid),
       firstName: new FormControl(this.applicantObj.firstName, [Validators.required]),
-      lastName: new FormControl(this.applicantObj.lastName),
+      lastName: new FormControl(this.applicantObj.lastName, [Validators.required]),
       emailId: new FormControl(this.applicantObj.emailId, [Validators.required]),
       phoneNumber: new FormControl(this.applicantObj.phoneNumber, [Validators.required, Validators.minLength(10)]),
       address: new FormControl(this.applicantObj.address),
@@ -56,7 +48,7 @@ export class AppComponent {
     })
   }
 
-  reset() {
+  reset(){
     this.applicantObj = new applicantModel();
     this.createForm()
   }
@@ -75,46 +67,32 @@ export class AppComponent {
     this.reset()
   }
 
-  addNew(item: applicantModel) {
+  // addApplicant() {
+  //   // this.applicantObj = item;
+  //   this.createForm() // to initialize the form with the value we have
+
+  // }
+
+  addApplicant(item: applicantModel) {
     this.dialog.open(PopuponeditComponent, {
       width: "90%",
       height: "580px"
     })
-
-    // this.applicantObj = item;
-    // this.createForm() // to initialize the form with the value we have
+    this.applicantObj = item;
+    this.createForm() // to initialize the form with the value we have
 
   }
 
   onEdit(item: applicantModel) {
+    this.dialog.open(PopuponeditComponent, {
+      width: "90%",
+      height: "580px"
+    })
     this.applicantObj = item;
-    // this.createForm() // to initialize the form with the value we have
+    this.createForm() // to initialize the form with the value we have
 
   }
 
-  onUpdate() {
-    debugger
-    const record = this.applicantList.find(item => item.applicantid == this.applicantForm.controls['applicantid'].value)
-    if (record != undefined) {
-      // record.applicantId = this.applicantForm.controls['applicantid'].value
-      record.firstName = this.applicantForm.controls['firstName'].value
-      record.lastName = this.applicantForm.controls['lastName'].value
-      record.emailId = this.applicantForm.controls['emailId'].value
-      record.phoneNumber = this.applicantForm.controls['phoneNumber'].value
-      record.address = this.applicantForm.controls['address'].value
-      record.pinCode = this.applicantForm.controls['pinCode'].value
-      record.city = this.applicantForm.controls['city'].value
-      record.state = this.applicantForm.controls['state'].value
-      record.country = this.applicantForm.controls['country'].value
-      record.adharNo = this.applicantForm.controls['adharNo'].value
-      record.panCard = this.applicantForm.controls['panCard'].value
-      record.employmentStatus = this.applicantForm.controls['employmentStatus'].value
-    }
-    localStorage.setItem("ApplicantData", JSON.stringify(this.applicantList))
-    this.reset()
-  }
-
-  // @ViewChild(PopuponeditComponent) Popupcomponent?: PopuponeditComponent
   onDelete(id: number) {
     const isDelete = confirm(" Do you want to delete for sure? ")
     if (isDelete) {

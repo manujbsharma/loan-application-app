@@ -1,5 +1,5 @@
 export class applicantModel {
-    applicantId : number;
+    applicantid : number;
     firstName: string;
     lastName: string;
     emailId: string;
@@ -15,7 +15,7 @@ export class applicantModel {
     // ["","Employed", "Self Employed", "Student", "Unemployed"];
 
     constructor() {
-        this.applicantId = 0;
+        this.applicantid = 1;
         this.firstName = "";
         this.lastName = "";
         this.emailId = "";

@@ -6,18 +6,36 @@
       </div>
       <div class="card-body">
         <div class="row">
+          <div class="col-6">
+            <button class="btn btn-success" (click)="addNew(applicantObj)">+ Add New</button>  
+            <!-- <button class="btn btn-success" (click)="Popupcomponent?.addApplicant(applicantObj)">+ Add Applicant</button> -->
+          </div>
           <div class="col-12">
             <table class="table table-bordered">
-              <thead>
+              <thead class = "text-center">
                 <tr>
                   <th>S. no.</th>
                   <th>Name</th>
-                  <th>Contact</th>
+                  <th>Employee Status</th>
+                  <th>State</th>
                   <th>Email</th>
+                  <th>Action</th>
                 </tr>
               </thead>
-              <tbody>
-
+              <tbody class="text-center">
+                @for (applicant of applicantList; track $index) {
+                  <tr>
+                    <td>{{$index+1}}</td>
+                    <td>{{applicant.firstName}} {{applicant.lastName}}</td>
+                    <td>{{applicant.employmentStatus}}</td>
+                    <td>{{applicant.state}}</td>
+                    <td>{{applicant.emailId}}</td>
+                    <td class="text-center">
+                      <button class="btn btn-primary" (click)="onEdit(applicant)">Edit</button>                      
+                      <button class="btn btn-danger mx-2" (click)="onDelete(applicant.applicantid)">Delete</button>
+                    </td>
+                  </tr>
+                }
               </tbody>
             </table>
           </div>
@@ -36,6 +54,13 @@
             <div class="col-6">
               <label for="firstName">First Name</label>
               <input type="text" formControlName = "firstName" class="form-control">
+              <div class="text-danger">
+                @if (applicantForm.controls['firstName'].touched) {
+                @if (applicantForm.controls['firstName'].errors?.['required']) {
+                  <span> First Name is Required!! </span>
+                }
+                }
+              </div>
             </div>
             <div class="col-6">
               <label for="lastName">Last Name</label>
@@ -48,6 +73,16 @@
             <div class="col-6">
               <label for="phoneNumber">Phone Number</label>
               <input type="text" formControlName = "phoneNumber" class="form-control">
+              <div class="text-danger">
+                @if (applicantForm.controls['phoneNumber'].touched) {
+                @if (applicantForm.controls['phoneNumber'].errors?.['required']) {
+                <span> Phone Number is Required!! </span>
+                }
+                @if (applicantForm.controls['phoneNumber'].errors?.['minlength']) {
+                <span> Phone number should be of 10 digits </span>
+                }
+                }
+              </div>
             </div>
             <div class="col-12">
               <label for="address">Address</label>
@@ -78,16 +113,21 @@
               <input type="text" formControlName = "panCard" class="form-control">
             </div>
             <div class="col-6">
-              <label for="employeeStatus">Employee Status</label>
-              <input type="text" formControlName = "employeeStatus" class="form-control">
+              <label for="employmentStatus">Employee Status</label>
+              <input type="text" formControlName = "employmentStatus" class="form-control">
             </div>
           </div>
           <div class="row pt-2">
             <div class="col-6 text-center">
-              <button class="btn btn-secondary">Reset</button>
+              <button class="btn btn-secondary" type="button" (click)="reset()">Reset</button>
             </div>
             <div class="col-6 text-center">
-              <button class="btn btn-success">+ Add Applicant</button>
+              @if (applicantForm.controls['applicantid'].value == '1') {
+                <!-- <button class="btn btn-success" (click)="onSave()"> Save </button> -->
+              } @else {
+                <button class="btn btn-warning" type="button" (click)="onUpdate()">Update</button>
+              } 
+              
             </div>
           </div>
         </form>
