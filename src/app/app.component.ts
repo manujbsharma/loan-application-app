@@ -88,7 +88,7 @@ export class AppComponent {
 
   onEdit(item: applicantModel) {
     this.applicantObj = item;
-    // this.createForm() // to initialize the form with the value we have
+    this.createForm() // to initialize the form with the value we have
 
   }
 
