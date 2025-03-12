@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { applicantModel } from '../Model/applicant';
+import { applicantModel } from '../Model/Applicant';
 
 
 @Component({
@@ -73,32 +73,32 @@ export class PopuponeditComponent {
 
   // }
 
-  addApplicant(item: applicantModel) {
-    this.dialog.open(PopuponeditComponent, {
-      width: "90%",
-      height: "580px"
-    })
-    this.applicantObj = item;
-    this.createForm() // to initialize the form with the value we have
+  // addApplicant(item: applicantModel) {
+  //   this.dialog.open(PopuponeditComponent, {
+  //     width: "100%",
+  //     height: "900px"
+  //   })
+  //   this.applicantObj = item;
+  //   this.createForm() // to initialize the form with the value we have
 
-  }
+  // }
 
-  onEdit(item: applicantModel) {
-    this.dialog.open(PopuponeditComponent, {
-      width: "90%",
-      height: "580px"
-    })
-    this.applicantObj = item;
-    this.createForm() // to initialize the form with the value we have
+  // onEdit(item: applicantModel) {
+  //   this.dialog.open(PopuponeditComponent, {
+  //     width: "90%",
+  //     height: "900px"
+  //   })
+  //   this.applicantObj = item;
+  //   this.createForm() // to initialize the form with the value we have
 
-  }
+  // }
 
-  onDelete(id: number) {
-    const isDelete = confirm(" Do you want to delete for sure? ")
-    if (isDelete) {
-      const index = this.applicantList.findIndex(i => i.applicantid == id)
-      this.applicantList.splice(index, 1)
-      localStorage.setItem("ApplicantData", JSON.stringify(this.applicantList))
-    }
-  }
+//   onDelete(id: number) {
+//     const isDelete = confirm(" Do you want to delete for sure? ")
+//     if (isDelete) {
+//       const index = this.applicantList.findIndex(i => i.applicantid == id)
+//       this.applicantList.splice(index, 1)
+//       localStorage.setItem("ApplicantData", JSON.stringify(this.applicantList))
+//     }
+//   }
 }

@@ -2,7 +2,7 @@ import { Component, ViewChild, AfterViewInit } from '@angular/core';
 // import { PopuponeditComponent } from './popuponedit/popuponedit.component';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 // import { RouterOutlet } from '@angular/router';
-import { applicantModel } from './Model/applicant';
+import { applicantModel } from './Model/Applicant';
 import { MatDialog, MatDialogConfig, MatDialogModule } from '@angular/material/dialog';
 import { PopuponeditComponent } from './popuponedit/popuponedit.component';
 
@@ -78,11 +78,11 @@ export class AppComponent {
   addNew(item: applicantModel) {
     this.dialog.open(PopuponeditComponent, {
       width: "90%",
-      height: "580px"
+      height: "650px"
     })
 
-    // this.applicantObj = item;
-    // this.createForm() // to initialize the form with the value we have
+    this.applicantObj = item;
+    this.createForm() // to initialize the form with the value we have
 
   }
 
